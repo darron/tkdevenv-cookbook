@@ -18,4 +18,6 @@
 # limitations under the License.
 #
 
-# Set meaningful node attributes here
+default['ruby']['version'] = '2.0'
+default['git']['name'] = 'darron froese'
+default['git']['email'] = 'darron@froese.org'
