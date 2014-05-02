@@ -64,15 +64,6 @@ task :packer_build do
   sh 'berks install --path vendor/cookbooks; packer build template.json'
 end
 
-desc "Syntax check and build AMI"
-task :build_ami => [:cleanup_vendor, :lint, :spec, :tailor, :taste, :rubocop, :packer_ami]
-
-task :packer_ami => [:cleanup_vendor, :packer_build_ami]
-
-task :packer_build_ami do
-  sh 'berks install --path vendor/cookbooks; packer build -only=amazon-ebs template.json'
-end
-
 desc "Syntax check and build Droplet"
 task :build_droplet => [:cleanup_vendor, :lint, :spec, :tailor, :taste, :rubocop, :packer_droplet]
 
@@ -80,15 +71,6 @@ task :packer_droplet => [:cleanup_vendor, :packer_build_droplet]
 
 task :packer_build_droplet do
   sh 'berks install --path vendor/cookbooks; packer build -only=digitalocean template.json'
-end
-
-desc "Syntax check and build Openstack Image"
-task :build_openstack => [:cleanup_vendor, :lint, :spec, :tailor, :taste, :rubocop, :packer_openstack]
-
-task :packer_openstack => [:cleanup_vendor, :packer_build_openstack]
-
-task :packer_build_openstack do
-  sh 'berks install --path vendor/cookbooks; packer build -only=openstack template.json'
 end
 
 desc "Syntax check and build Google Compute Image"
