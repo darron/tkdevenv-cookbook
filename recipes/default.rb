@@ -47,7 +47,7 @@ bash 'install virtualbox' do
   user 'root'
   cwd '/tmp'
   code <<-EOH
-  echo "deb http://download.virtualbox.org/virtualbox/debian precise contrib" >> /etc/apt/sources.list
+  echo 'deb http://download.virtualbox.org/virtualbox/debian precise contrib' >> /etc/apt/sources.list
   wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | sudo apt-key add -
   apt-get update
   apt-get install -y virtualbox-4.3 dkms
