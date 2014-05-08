@@ -39,12 +39,12 @@ task :cleanup_vendor do
   sh 'rm -rf vendor/cookbooks/*'
 end
 
-task :berksintall do
-  sh 'berks install --path vendor/cookbooks'
+task :berksinstall do
+  sh 'bundle exec berks install --path vendor/cookbooks'
 end
 
 desc "Syntax check and build Vagrant box"
-task :build_vagrant => [:cleanup_vendor, :cleanup_vagrant, :lint, :spec, :tailor, :taste, :rubocop, :berksintall, :vagrantup]
+task :build_vagrant => [:cleanup_vendor, :cleanup_vagrant, :lint, :spec, :tailor, :taste, :rubocop, :berksinstall, :vagrantup]
 task :vagrant => :build_vagrant
 
 task :vagrantup do
@@ -61,7 +61,7 @@ task :build => [:cleanup_vendor, :lint, :spec, :tailor, :taste, :rubocop, :packe
 task :packer => [:cleanup_vendor, :packer_build]
 
 task :packer_build do
-  sh 'berks install --path vendor/cookbooks; packer build template.json'
+  sh 'bundle exec berks install --path vendor/cookbooks; packer build template.json'
 end
 
 desc "Syntax check and build Droplet"
@@ -70,7 +70,7 @@ task :build_droplet => [:cleanup_vendor, :lint, :spec, :tailor, :taste, :rubocop
 task :packer_droplet => [:cleanup_vendor, :packer_build_droplet]
 
 task :packer_build_droplet do
-  sh 'berks install --path vendor/cookbooks; packer build -only=digitalocean template.json'
+  sh 'bundle exec berks install --path vendor/cookbooks; packer build -only=digitalocean template.json'
 end
 
 desc "Syntax check and build Google Compute Image"
@@ -79,7 +79,7 @@ task :build_gce => [:cleanup_vendor, :lint, :spec, :tailor, :taste, :rubocop, :p
 task :packer_gce => [:cleanup_vendor, :packer_build_gce]
 
 task :packer_build_gce do
-  sh 'berks install --path vendor/cookbooks; packer build -only=googlecompute template.json'
+  sh 'bundle exec berks install --path vendor/cookbooks; packer build -only=googlecompute template.json'
 end
 
 desc "Convert GCE key to pem format."
