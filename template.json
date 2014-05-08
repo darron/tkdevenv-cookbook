@@ -8,6 +8,7 @@
               "type": "digitalocean",
               "image_id": "3101045",
               "size_id": "63",
+              "region": "ams2",
               "snapshot_name": "tkdevenv {{timestamp}}"
             }],
 
